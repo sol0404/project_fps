@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arena FPS</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/client/style.css" />
+  <script type="importmap">
+    { "imports": { "three": "/vendor/three.module.js", "three/addons/": "/vendor-addons/" } }
+  </script>
+</head>
+<body>
+  <canvas id="game" tabindex="-1"></canvas>
+
+  <!-- 메뉴 / 캐릭터 선택 -->
+  <div id="menu" class="overlay">
+    <h1>ARENA FPS</h1>
+    <p class="subtitle">초원 대난투</p>
+    <input id="name-input" maxlength="16" placeholder="닉네임" />
+    <div id="char-list"></div>
+    <button id="play-btn" disabled>캐릭터를 선택하세요</button>
+    <p class="controls">WASD 이동 · Space 점프 · Shift 걷기 · 마우스 사격 · R 재장전 · E 스킬 · Tab 점수판</p>
+    <button id="credits-btn" class="link-btn">크레디트 · 라이선스</button>
+  </div>
+
+  <div id="credits" class="overlay hidden">
+    <div class="credits-box">
+      <h2>크레디트</h2>
+      <h3>캐릭터 모델</h3>
+      <p>"chiikawa and friends" by <a href="https://sketchfab.com/doniisw" target="_blank" rel="noopener">Nini</a><br />
+        출처: <a href="https://sketchfab.com/3d-models/chiikawa-and-friends-4c156cab855e451481829d25f4cf3bb1" target="_blank" rel="noopener">Sketchfab</a><br />
+        라이선스: <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a> — 비상업적 이용만 가능<br />
+        변경 사항: 원본 GLB는 그대로 두고, 게임 안에서 캐릭터별 분리·크기·원점·방향만 조정했습니다.</p>
+      <p class="note">치이카와 캐릭터의 원저작권은 나가노(ナガノ)에게 있으며, 이 게임은 비공식 비상업 팬 프로젝트입니다.</p>
+      <h3>맵 소품</h3>
+      <p>Nature Kit by <a href="https://kenney.nl" target="_blank" rel="noopener">Kenney</a> — <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a></p>
+      <h3>엔진</h3>
+      <p><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> (MIT)</p>
+      <button id="credits-close">닫기</button>
+    </div>
+  </div>
+
+  <!-- 인게임 HUD -->
+  <div id="hud" class="hidden">
+    <div id="crosshair"></div>
+    <div id="hitmarker"></div>
+    <div id="damage-flash"></div>
+    <div id="killfeed"></div>
+    <div id="status"></div>
+
+    <img id="portrait" alt="" />
+    <div id="hp-box">
+      <div id="hp-text">100</div>
+      <div id="hp-bar"><div id="hp-fill"></div></div>
+    </div>
+
+    <div id="ability-box">
+      <div id="ability-key">E</div>
+      <div id="ability-name"></div>
+      <div id="ability-cd"></div>
+    </div>
+
+    <div id="ammo-box">
+      <div id="weapon-name"></div>
+      <div id="ammo-text"></div>
+    </div>
+
+    <div id="scoreboard" class="hidden"></div>
+    <div id="death" class="overlay hidden"><h2></h2><p></p></div>
+    <div id="lock-hint" class="overlay hidden"><button id="resume-btn" type="button">게임 계속</button><button id="free-play-btn" type="button">마우스 고정 없이 플레이</button><p id="lock-message" role="status">게임 계속을 누르면 마우스로 시점을 움직일 수 있어요. Esc로 조작을 멈춥니다.</p></div>
+  </div>
+
+  <script type="module" src="/client/main.js"></script>
+</body>
+</html>

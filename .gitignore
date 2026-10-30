@@ -1,0 +1,38 @@
+# Dependencies and generated files
+node_modules/
+dist/
+coverage/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Local AI assistant conversations, state and configuration
+.claude/
+.codex/
+.cursor/
+.aider*
+.continue/
+.cline/
+.roo/
+.serena/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+*.jsonl
+*.chatlog
+*.chat.json
+chat-history/
+conversation-history/
+transcripts/
+sessions/
+
+# Local editor state
+.vscode/
+.idea/
