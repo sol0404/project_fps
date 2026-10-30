@@ -35,6 +35,10 @@ const playBtn = document.getElementById('play-btn');
 nameInput.value = localStorage.getItem('fps-name') || '';
 let thumbnails = {};
 
+fetch('/lan').then((r) => r.json()).then((urls) => {
+  if (urls.length) document.getElementById('lan-hint').textContent = `같은 와이파이 친구 접속 주소: ${urls.join(' · ')}`;
+}).catch(() => {});
+
 document.getElementById('credits-btn').onclick = () => document.getElementById('credits').classList.remove('hidden');
 document.getElementById('credits-close').onclick = () => document.getElementById('credits').classList.add('hidden');
 

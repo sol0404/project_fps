@@ -1,5 +1,6 @@
 import http from 'node:http';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer } from 'ws';
@@ -29,8 +30,19 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
+// 같은 네트워크의 다른 기기가 접속할 주소 (내부 IPv4)
+function lanUrls() {
+  return Object.values(os.networkInterfaces()).flat()
+    .filter((a) => a.family === 'IPv4' && !a.internal)
+    .map((a) => `http://${a.address}:${PORT}`);
+}
+
 const server = http.createServer((req, res) => {
   let url = decodeURIComponent(req.url.split('?')[0]);
+  if (url === '/lan') {
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify(lanUrls()));
+  }
   if (url === '/') url = '/client/index.html';
   const prefix = Object.keys(ROUTES).find((p) => url.startsWith(p));
   const base = prefix && path.join(ROOT, ROUTES[prefix]);
@@ -229,4 +241,5 @@ setInterval(() => {
 
 server.listen(PORT, () => {
   console.log(`FPS 서버 실행 중: http://localhost:${PORT}`);
+  for (const url of lanUrls()) console.log(`같은 네트워크의 다른 PC 접속 주소: ${url}`);
 });
