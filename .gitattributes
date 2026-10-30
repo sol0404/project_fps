@@ -1,0 +1,6 @@
+# 텍스트는 LF로 저장, 3D 모델/이미지는 바이너리로 취급
+* text=auto eol=lf
+*.glb binary
+*.gltf binary
+*.png binary
+*.jpg binary

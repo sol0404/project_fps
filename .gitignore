@@ -36,3 +36,12 @@ sessions/
 # Local editor state
 .vscode/
 .idea/
+
+# More local AI/editor tools
+.windsurf/
+.gemini/
+.copilot/
+.aiassistant/
+.history/
+.vs/
+*.code-workspace
